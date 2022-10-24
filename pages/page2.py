@@ -17,7 +17,8 @@ layout = dbc.Container([
         ]), 
         dbc.Col([
             html.P("This is column 2."), 
-            html.P("!You can add many fucking cool components using the bootstrap dash components library!"),
+            html.P("You can add many cool components using the bootstrap dash components library!"),
+            html.P("1")
         ])
     ])
 ])
