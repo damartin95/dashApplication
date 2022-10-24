@@ -72,7 +72,7 @@ def write_session_username1(n_clicks, mbid1, username1):  ### FIX - no need for 
     prevent_initial_call=True
 )
 def update_output_div(n_clicks, mbid, username):
-    return 'You have entered "{}" and "{}" and clicked {} times. Please provide valid information'.format(mbid, username, n_clicks)
+    return 'You haves entered "{}" and "{}" and clicked {} times. Please provide valid information'.format(mbid, username, n_clicks)
 
 
 
