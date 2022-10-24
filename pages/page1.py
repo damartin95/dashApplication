@@ -36,7 +36,7 @@ def result(session_mbid1, session_username1):
 # MOST RECENTLY LISTENED TO SONG
 @callback(
     Output('my_div5', 'children'),
-    Input('button3', 'n_clicks'),
+    #Input('button3', 'n_clicks'),
     Input('session_mbid1', 'data'),
     Input('session_username1', 'data'),
     Input('session_mbid2', 'data'),
@@ -61,7 +61,7 @@ def update_output_div(n_clicks, mbid1, username1, mbid2, username2): #n_clicks w
 #GRAPHICS    
 @callback(
     Output('my_div6', 'children'),
-    Input('button3', 'n_clicks'),
+    #Input('button3', 'n_clicks'),
     Input('session_mbid1', 'data'),
     Input('session_username1', 'data'),
     Input('session_mbid2', 'data'),
@@ -101,7 +101,7 @@ def update_output_div(n_clicks, mbid1, username1, mbid2, username2): #n_clicks w
 
 @callback(
     Output('my_div7', 'children'),
-    Input('button3', 'n_clicks'),
+    #Input('button3', 'n_clicks'),
     Input('session_mbid1', 'data'),
     Input('session_username1', 'data'),
     Input('session_mbid2', 'data'),
