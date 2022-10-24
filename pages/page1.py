@@ -13,8 +13,11 @@ from second import returnNameCombination, plot_timeline_MONTH, callMeBaby, last_
 print('I am page1')
 
 layout = dbc.Container([
-    html.Div(id='my_div8'),
-    html.Button('Click Me daddy', id='button3'),
+    #html.Div(id='my_div8'),
+    #html.Button('Click Me', id='button3'),
+    
+    html.Center(html.H1("GEDULD IST (vorerst) EINE TUGEND")),
+    
     html.Div(id='my_div5'),
     html.Div(id='my_div6'),
     html.Div(id='my_div7')
