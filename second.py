@@ -167,7 +167,7 @@ def returnNameCombination(name1, name2):
 
 def most_listened_to_on_single_day_top_10_days(df): ### works for one and two users!
   
-    print('--- MOST LISTENED TO SONGS ON A SINGLE DAY ---' + '\n')
+    #print('--- MOST LISTENED TO SONGS ON A SINGLE DAY ---' + '\n')
     
     df.Date = pd.to_datetime(df.Date)
     df['Date_day'] = df.Date.dt.to_period("D")
@@ -181,10 +181,11 @@ def most_listened_to_on_single_day_top_10_days(df): ### works for one and two us
     df4=df4.reindex(columns=['Date_day', 'Song', 'Artist', 'Count', 'User']).reset_index(drop=True)
     
     
-    print(df4.head(10), '\n')
-    
+    #print(df4.head(10), '\n')
+    return df4.head(10)
 
-    return
+
+
 
 def last_x_days_most_listened_to_on_single_day(df, xdays): ### works for one and two users!
   
@@ -228,7 +229,3 @@ def last_x_days_most_listened_to_on_single_day(df, xdays): ### works for one and
     return df4.head(xdays)
 
 
-last_x_days_most_listened_to_on_single_day(callMeBaby('835defa77f6078c7a34c3c6ba04854c6', 'Wuhuspringfield'),5)
-
-
-last_x_days_most_listened_to_on_single_day(callMeBaby('ab8ab5b6deefd7b8afa5c1adab89fcb8', 'feybmertn'),5)
