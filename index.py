@@ -1,16 +1,24 @@
 
 import dash
 from dash import dcc, html
-from app import app, server
+
+
+import dash
+from flask import Flask
 
 from pages import page0, page1, page2
 from components import navbar
 
 from dash.dependencies import Input, Output, State
+import dash_bootstrap_components as dbc
 import git
 
 
-server = app.server
+
+
+server = Flask(__name__)
+app = dash.Dash(server=server, external_stylesheets=[dbc.themes.BOOTSTRAP])
+
 nav = navbar.navbar()
 
 
