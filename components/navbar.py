@@ -12,7 +12,7 @@ def navbar():
                 dbc.NavItem(dbc.NavLink("Page 2", href="/page2")),
             ] ,
             brand="lastFM-ify",
-            brand_href="/page0",
+            brand_href="/",
             color="dark",
             dark=True,
         ) 

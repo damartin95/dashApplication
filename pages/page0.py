@@ -12,32 +12,58 @@ from second import returnNameCombination, plot_timeline_MONTH, callMeBaby
 
 print('I am page0')
 
+style_dbc_Input = {'width':'450px','height':'45px','padding':'10px','margin-top':'10px', 
+            'border-width':'2px','border-color':'#a0a3a2'}
+
+style_html_Button = {'width':'100px','height':'45px','padding':'10px','margin-top':'10px', 
+            'border-width':'2px','border-color':'#a0a3a2'}
+
 
 layout = dbc.Container([
 
     html.Br(),
+    html.Center(html.H1("Login")),
+    html.Br(),
+    html.Br(),
+    html.Div(
+        children=[
+            dbc.Input(id='mbid1', value='835defa77f6078c7a34c3c6ba04854c6', type="text", 
+            style=style_dbc_Input),
+            ],
+        style={"display": "flex", "justifyContent": "center"}),
+    html.Div(
+        children=[
+            dbc.Input(id='username1', value='wuhuspringfield', type='text',
+            style=style_dbc_Input),
+            ],
+        style={"display": "flex", "justifyContent": "center"}),
+    html.Br(),
+    html.Div(
+        children=[
+            dbc.Button('Submit', id='button1', n_clicks=0,  #remove n_clicks=0!
+            color='secondary'),
+            ],
+        style={"display": "flex", "justifyContent": "center"}),
 
-    html.Center(html.H1("BISCH - GEH WEITER - AUF Page1 (oben rechts)")),
+    html.Br(),
 
+    html.Div(
+        children=[
+        dbc.Checklist(
+            options=[
+                {"label": "You want to add a friend?", "value": 0},
+            ],
+            value=[],
+            id="switches_input",
+            switch=True
+        ),], 
+        style={"display": "flex", "justifyContent": "center"}
+    
+    ),
     html.Br(),
-    html.Br(),
-    html.Br(),
-    dbc.Input(id='mbid1', value='835defa77f6078c7a34c3c6ba04854c6', type="text"),
-    html.Br(),
-    dbc.Input(id='username1', value='wuhuspringfield', type='text'),
-    html.Br(),
-    html.Button('Click Me', id='button1', n_clicks=0), #remove n_clicks=0!
-    html.Div(id='my-div2'),
-    html.Div(id='my-div3'),
-    html.Br(),
-    html.P('Add additional user'),
-    html.Br(),
-    dbc.Input(id='mbid2', value='ab8ab5b6deefd7b8afa5c1adab89fcb8', type="text"),
-    html.Br(),
-    dbc.Input(id='username2', value='feybmertn', type='text'),
-    html.Br(),
-    html.Button('Click Me', id='button2', n_clicks=0), #remove n_clicks=0!
-    html.Br()
+    html.Div(id='add_friend_form')
+    
+    
 ])
 
 
@@ -111,3 +137,42 @@ def write_session_username1(n_clicks, mbid2, username2):  ### FIX - no need for 
     else:
         print('wrote session_username2')
         return username2
+
+
+
+@callback(
+    Output("add_friend_form", "children"), 
+    Input("switches_input", "value"),
+)
+def add_friend(switches_input):
+
+    print('Y u no call me?')
+    print('switches_input ', switches_input)
+
+    if len(switches_input) > 0:
+
+        add_friend_form = html.Div(children=[
+            html.Div(
+            children=[
+                dbc.Input(id='mbid2', value='ab8ab5b6deefd7b8afa5c1adab89fcb8', type="text", 
+                style=style_dbc_Input),
+                ],
+            style={"display": "flex", "justifyContent": "center"}),
+            html.Div(
+                children=[
+                    dbc.Input(id='username2', value='feybmertn', type='text',
+                    style=style_dbc_Input),
+                    ],
+                style={"display": "flex", "justifyContent": "center"}),
+            html.Br(),
+            html.Div(
+                children=[
+                    dbc.Button('Submit', id='button2', n_clicks=0,  #remove n_clicks=0!
+                    color='secondary'),
+                    ],
+                style={"display": "flex", "justifyContent": "center"}),
+
+        ])
+        return add_friend_form
+    else:
+        return ''
