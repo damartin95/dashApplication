@@ -51,9 +51,9 @@ layout = dbc.Container([
         children=[
         dbc.Checklist(
             options=[
-                {"label": "You want to add a friend?", "value": 0},
+                {"label": "You want to add a friend?", "value": 1}, #default value = 0
             ],
-            value=[],
+            value=[1], # default value = []
             id="switches_input",
             switch=True
         ),], 
@@ -75,11 +75,11 @@ layout = dbc.Container([
     #, prevent_initial_call=True
 )
 def write_session_mbid1(n_clicks, mbid1, username1): ### FIX - no need for three arguments
-    print('write_session_mbid2')
+    #print('write_session_mbid2')
     if n_clicks==None: ### When switching between page0 and page1, session_mbid and session_username are not saved because n_clicks==None and therewith will be made ''
         return ''
     else:
-        print('wrote session_mbid1')
+        #print('wrote session_mbid1')
         return mbid1
 
 @callback(
@@ -93,7 +93,7 @@ def write_session_username1(n_clicks, mbid1, username1):  ### FIX - no need for 
     if n_clicks==None:
         return ''
     else:
-        print('wrote session_username1')
+        #print('wrote session_username1')
         return username1
 
 @callback(
@@ -117,11 +117,11 @@ def update_output_div(n_clicks, mbid, username):
     #, prevent_initial_call=True
 )
 def write_session_mbid1(n_clicks, mbid2, username2): ### FIX - no need for three arguments
-    print('write_session_mbid2')
+    #print('write_session_mbid2')
     if n_clicks==None: ### When switching between page0 and page1, session_mbid and session_username are not saved because n_clicks==None and therewith will be made ''
         return ''
     else:
-        print('wrote session_mbid2')
+        #print('wrote session_mbid2')
         return mbid2
 
 @callback(

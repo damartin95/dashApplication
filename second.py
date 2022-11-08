@@ -15,8 +15,7 @@ USER_AGENT = 'Mozilla/5.0'
 
 
 def lastfm_get(payload, user):
-    
-    
+     
     headers = {'user-agent': USER_AGENT}
     url = 'https://ws.audioscrobbler.com/2.0/'
     payload['api_key'] = user[0]
@@ -34,7 +33,7 @@ def callMeBaby(name1, name2):
              #, ['ab8ab5b6deefd7b8afa5c1adab89fcb8', 'feybmertn']
              )
     page = 1
-    limit =  500 #default: 500
+    limit = 500 #default: 500
     
     payload = {
                 'method': 'user.getrecenttracks',
@@ -48,15 +47,22 @@ def callMeBaby(name1, name2):
     
         
     single_response_json = response.json()
+
+    #print('single_response_json', '\n', single_response_json)
+
     single_response_track = single_response_json['recenttracks']['track']
         
-        
+
+
+
+    
     responses_df.append(single_response_track)
     
     
     r0_df = pd.concat([pd.DataFrame(i) for i in responses_df], ignore_index=True)
     
 
+    
     
     
     if 1==1:
@@ -114,23 +120,18 @@ def callMeBaby(name1, name2):
     return r0_df
 
 
-def plot_timeline_MONTH(df): ### works!
+def plot_timeline_MONTH(df, timefilter): ### works!
     
-    
-    
-    
-    df_single = df
-    
-    
+    print('timefilter ', timefilter)
+
+    timefilterCapital = timefilter[0]
+
+    df_single = df   
     df_single.loc[:, 'Date'] = pd.to_datetime(df_single.Date)
-    df_single.loc[:, 'Date_month'] = df_single.Date.dt.to_period("D")
+    df_single.loc[:, 'Date_month'] = df_single.Date.dt.to_period(timefilterCapital)
                 
-            
     ChbyYear = df_single.groupby(df_single.Date_month).Song.count()
     df_Year=ChbyYear.to_frame()    
-    
-    
-    
     
     
     #print('df_single[User][1] ', )
@@ -139,18 +140,13 @@ def plot_timeline_MONTH(df): ### works!
     df_Year['User']= df_single['User'].iloc[0]
     
     
-    
     df_Year['Year']= ChbyYear.index    
     df_Year['Year'] = df_Year['Year'].astype(str)
     df_Year.reset_index(drop=True, inplace=True)
 
     
-    
-    
-    
     df_Year.to_csv('df_all.csv')
     
-
 
     return df_Year
 
@@ -183,8 +179,6 @@ def most_listened_to_on_single_day_top_10_days(df): ### works for one and two us
     
     #print(df4.head(10), '\n')
     return df4.head(10)
-
-
 
 
 def last_x_days_most_listened_to_on_single_day(df, xdays): ### works for one and two users!
@@ -229,3 +223,47 @@ def last_x_days_most_listened_to_on_single_day(df, xdays): ### works for one and
     return df4.head(xdays)
 
 
+
+def top_songs_per_MONTH(df): ### ONLY APPLICABLE FOR ONE USER
+    
+    #print('--- TOP SONGS PER MONTH ---' + '\n')
+    
+    df.Date = pd.to_datetime(df.Date)
+    df['Date_month'] = df.Date.dt.to_period("M")
+    grouped = df.groupby(['Date_month', 'Song']).size()    
+    grouped = grouped.to_frame()
+    grouped.columns = ['Count']
+    grouped = grouped.groupby(['Date_month']).apply(lambda x: x.nlargest(5,'Count')).reset_index(level=0, drop=True)
+    grouped.reset_index(inplace=True)
+    
+    #print('grouped in function', '\n', grouped)
+
+    return grouped
+
+
+
+def top_unlistened_to_songs(df): ### ONLY APPLICABLE FOR ONE USER
+    
+    #print('--- SONGS THAT SKIPPED ON US ---' + '\n')
+    
+    df.Date = pd.to_datetime(df.Date)
+    df['Date_month'] = df.Date.dt.to_period("M")
+    grouped = df.groupby(['User', 'Date_month', 'Artist', 'Song']).size()    
+    grouped = grouped.to_frame()
+    grouped.columns = ['Count']
+
+    grouped = grouped.reset_index()
+
+    #print('grouped before', '\n', grouped)
+
+    grouped = grouped.drop_duplicates(['Artist','Song'], keep=False)
+
+    grouped = grouped.groupby(['User', 'Date_month']).apply(lambda x: x.nlargest(5,'Count')).reset_index(level=0, drop=True)
+    
+    
+    #grouped.reset_index(inplace=True) ### might be not needed!
+    #grouped.to_csv('grouped_keep_false_groupby_user.csv')
+
+    #print('grouped', '\n', grouped)
+
+    return grouped
