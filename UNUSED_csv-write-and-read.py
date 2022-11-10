@@ -7,7 +7,7 @@ from dash import dcc, html
 from dash.dependencies import Input, Output, State
 from flask import Flask
 import git
-from second import returnNameCombination, plot_timeline_MONTH, callMeBaby
+from dataloader import returnNameCombination, plot_timeline_MONTH, callMeBaby
 from components import navbar
 from pages import page2
 

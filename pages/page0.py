@@ -7,7 +7,7 @@ from dash.dependencies import Input, Output, State
 import dash_bootstrap_components as dbc
 from dash.exceptions import PreventUpdate
 
-from second import returnNameCombination, plot_timeline_MONTH, callMeBaby
+from analytics import *
 
 
 print('I am page0')
