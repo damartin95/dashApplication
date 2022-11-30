@@ -1,16 +1,13 @@
 
 import dash
 from dash import dcc, html
-
-
-import dash
+from dash.dependencies import Input, Output
+import dash_bootstrap_components as dbc
 from flask import Flask
 
-from pages import page0, page1, page2
+from pages import page_login, page_data, page_aboutme
 from components import navbar
 
-from dash.dependencies import Input, Output, State
-import dash_bootstrap_components as dbc
 import git
 
 
@@ -46,11 +43,11 @@ app.layout = html.Div([
               [Input('url', 'pathname')])
 def display_page(pathname):
     if pathname == '/':
-        return page0.layout
-    elif pathname == '/page1':
-         return page1.layout
-    elif pathname == '/page2':
-         return page2.layout
+        return page_login.layout
+    elif pathname == '/data':
+         return page_data.layout
+    elif pathname == '/aboutme':
+         return page_aboutme.layout
     else:
         return "Error 404!"
 

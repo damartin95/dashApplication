@@ -7,9 +7,9 @@ def navbar():
     layout = html.Div([
         dbc.NavbarSimple(
             children=[
-                dbc.NavItem(dbc.NavLink("Page 0", href="/")),
-                dbc.NavItem(dbc.NavLink("Page 1", href="/page1")),
-                dbc.NavItem(dbc.NavLink("Page 2", href="/page2")),
+                dbc.NavItem(dbc.NavLink("Login", href="/")),
+                dbc.NavItem(dbc.NavLink("Data", href="/data")),
+                dbc.NavItem(dbc.NavLink("About me", href="/aboutme")),
             ] ,
             brand="lastFM-ify",
             brand_href="/",

@@ -9,7 +9,7 @@ from flask import Flask
 import git
 from dataloader import returnNameCombination, plot_timeline_MONTH, callMeBaby
 from components import navbar
-from pages import page2
+from pages import page_aboutme
 
 
 server = Flask(__name__)
